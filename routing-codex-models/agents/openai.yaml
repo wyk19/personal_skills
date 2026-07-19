@@ -1,0 +1,4 @@
+interface:
+  display_name: "Route Codex Models"
+  short_description: "Route coding work across Luna and Sol agents"
+  default_prompt: "Use $routing-codex-models to route this programming task to the appropriate Codex agents."
