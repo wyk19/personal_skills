@@ -2,8 +2,9 @@ import unittest
 from pathlib import Path
 
 
-SKILL_PATH = Path(__file__).resolve().parents[1] / "routing-codex-models" / "SKILL.md"
-README_PATH = Path(__file__).resolve().parents[1] / "README.md"
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+SKILL_PATH = PROJECT_ROOT / "skill" / "SKILL.md"
+README_PATH = PROJECT_ROOT / "README.md"
 
 
 class SkillContractTests(unittest.TestCase):

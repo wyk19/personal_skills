@@ -6,8 +6,8 @@ import unittest
 from pathlib import Path
 
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-AUDIT_SCRIPT = REPO_ROOT / "routing-codex-models" / "scripts" / "audit-routing-session.py"
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+AUDIT_SCRIPT = PROJECT_ROOT / "skill" / "scripts" / "audit-routing-session.py"
 
 
 class RoutingSessionAuditTests(unittest.TestCase):

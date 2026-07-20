@@ -10,6 +10,7 @@ Keep the repository root readable while making `routing-codex-models/` the compl
 README.md                         # repository index only
 routing-codex-models/
   README.md                       # project install, use, and audit documentation
+  .gitattributes                  # preserve intentional reference hard breaks
   skill/
     SKILL.md                      # only skill entrypoint and installable package
     agents/
@@ -32,7 +33,7 @@ The installable package is exactly `routing-codex-models/skill/` and contains th
 - Skill package paths are resolved relative to `routing-codex-models/skill/`.
 - Custom agent definitions are resolved from `routing-codex-models/agents/*.toml`.
 - Tests and current project docs are moved under `routing-codex-models/tests/` and `routing-codex-models/docs/` respectively.
-- The untracked copied Chinese Markdown is moved under `routing-codex-models/references/` without changing its contents.
+- The copied Chinese Markdown is moved under `routing-codex-models/references/` without changing its contents; intentional trailing spaces for Markdown hard breaks remain byte-preserved, and `.gitattributes` scopes `-whitespace` to `references/*.md`.
 
 ## Path Updates
 
