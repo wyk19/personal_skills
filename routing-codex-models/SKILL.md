@@ -13,6 +13,18 @@ Route programming work by uncertainty, blast radius, and verification risk. Keep
 
 If the request does not require code inspection, modification, debugging, testing, refactoring, or review, continue normally without starting the coding team. This includes ordinary conversation, writing-only work, and design discussion that has not reached implementation.
 
+## Non-Negotiable Dispatch Gate
+
+For every coding task, typed dispatch is mandatory before any implementation work. The parent may classify the request, coordinate workers, reconcile evidence, and run final verification, but must not inspect implementation details, edit files, write tests, or implement before a successful typed spawn.
+
+Small, urgent, and sequential tasks are not exceptions. Sequential means one typed worker at a time; it does not authorize parent-thread implementation.
+
+Routing is active only after a successful typed spawn. Every routed `spawn_agent` call must include `agent_type` set to the selected role and `fork_turns="none"`. A generic call, or a role-like `task_name`, does not count.
+
+If typed routing is rejected, report `ROUTING_UNAVAILABLE: <exact runtime error>` and stop before code inspection or mutation. Do not silently fall back to the parent thread.
+
+A successful `code_explorer` or `code_reviewer` spawn never authorizes the parent to edit, write tests, implement, or correct code. Every implementation and review correction remains owned by `simple_coder` or `complex_coder`; the parent only coordinates and verifies their work.
+
 ## Route Work
 
 | Observable condition | Agent | Model policy |
@@ -42,8 +54,8 @@ For an explicit one-file literal change with a named test, dispatch `simple_code
 
 ## Handle Missing Capabilities
 
-- Attempt the routed `agent_type` call. Only if the runtime rejects `agent_type` or the named agent is unavailable, say so and continue in the current thread using the same role boundary. Do not claim model routing occurred.
-- If a configured model is unavailable, stop retrying that agent and report the exact model ID.
+- Attempt the routed `agent_type` call. If the runtime rejects `agent_type` or the named agent is unavailable, report `ROUTING_UNAVAILABLE: <exact runtime error>` and stop before code inspection or mutation. Do not claim model routing occurred.
+- If a configured model is unavailable, report `ROUTING_UNAVAILABLE: model <exact model ID> unavailable` and stop without fallback. Do not retry that agent or substitute another model.
 - If agents disagree, inspect their evidence before deciding.
 
 ## Common Mistakes
